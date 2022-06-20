@@ -1,13 +1,12 @@
-from django import forms
-from .models import Usuario, Tarefa
-
-class CadastroModelForm(forms.ModelForm):
-   class Meta:
-       model = Usuario
-       fields = ['nome', 'email', 'senha']
+from  django.contrib.auth import forms
+from .models import Usuario
 
 
-class CadastroModelTarefa(forms.ModelForm):
-    class Meta:
-        model = Tarefa
-        fields = ['descricao']
+class UserChangeForm(forms.UserChangeForm):
+    class Meta(forms.UserChangeForm.Meta):
+        model = Usuario
+
+
+class UserCreationForm(forms.UserCreationForm):
+    class Meta(forms.UserCreationForm.Meta):
+        model = Usuario

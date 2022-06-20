@@ -1,11 +1,14 @@
 from django.contrib import admin
-from .models import Usuario, Tarefa
+from django.contrib.auth import admin as auth_admin
+from .forms import UserCreationForm, UserChangeForm
+from .models import Usuario
 
 
 @admin.register(Usuario)
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'senha', 'criado', 'modificado', 'ativo')
-
-
-
-admin.site.register(Tarefa)
+class UserAdmin(auth_admin.UserAdmin):
+    form = UserChangeForm
+    add_form = UserCreationForm
+    model = Usuario
+    fieldsets = auth_admin.UserAdmin.fieldsets + (
+        ("Descrição", {'fields':('descricao',)}),
+    )
