@@ -1,14 +1,9 @@
 from django.contrib import admin
-from django.contrib.auth import admin as auth_admin
-from .forms import UserCreationForm, UserChangeForm
-from .models import Usuario
+from .models import Tarefa
+
+class TarefasAdmin(admin.ModelAdmin):
+    list_display = ('id','tarefa','usuario', 'usuario_id')
 
 
-@admin.register(Usuario)
-class UserAdmin(auth_admin.UserAdmin):
-    form = UserChangeForm
-    add_form = UserCreationForm
-    model = Usuario
-    fieldsets = auth_admin.UserAdmin.fieldsets + (
-        ("Descrição", {'fields':('descricao',)}),
-    )
+admin.site.register(Tarefa, TarefasAdmin)
+

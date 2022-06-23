@@ -1,15 +1,27 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from .models import Usuario
+from .models import Tarefa
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as lg
+from .forms import CadastroModelTarefa
+
 
 
 @login_required(login_url="login")
 def index(request):
-    return render(request, 'index.html')
+    tasks = Tarefa.objects.filter(usuario_id=request.user)
+
+    if str(request.method) == 'POST':
+        form = CadastroModelTarefa(request.POST)
+        if form.is_valid():
+            vincula = form.save(commit=False)
+            vincula.usuario = request.user
+            vincula.save()
+
+    return render(request, 'index.html',{'tasks': tasks} )
 
 
 def cadastro(request):
@@ -18,14 +30,14 @@ def cadastro(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        user = Usuario.objects.filter(username=username, email=email).first()
+        user = User.objects.filter(username=username, email=email).first()
 
         if user:
             messages.error(request, 'Já existe uma conta com esse email',
                            extra_tags='cad')
             return redirect('cadastro')
 
-        user = Usuario.objects.create_user(username=username, email=email, password=senha)
+        user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
         messages.success(request, 'Usuário cadastrado com sucesso.', extra_tags='cad')
 
@@ -36,7 +48,7 @@ def login(request):
     if request.method == 'POST':
         try:
             email = request.POST['email']
-            username = Usuario.objects.get(email=email).username
+            username = User.objects.get(email=email).username
             senha = request.POST['senha']
             user = authenticate(request, username=username, password=senha)
             if user:
@@ -50,8 +62,14 @@ def login(request):
 
 
 def deletar(request, id):
-    pass
+    task = get_object_or_404(Tarefa, pk=id)
+    task.delete()
+    return HttpResponseRedirect('/')
 
+
+def sair(request):
+    logout(request)
+    return HttpResponseRedirect('login')
 
 
 

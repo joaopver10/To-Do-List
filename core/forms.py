@@ -1,12 +1,8 @@
-from  django.contrib.auth import forms
-from .models import Usuario
+from django import forms as fm
+from .models import Tarefa
 
 
-class UserChangeForm(forms.UserChangeForm):
-    class Meta(forms.UserChangeForm.Meta):
-        model = Usuario
-
-
-class UserCreationForm(forms.UserCreationForm):
-    class Meta(forms.UserCreationForm.Meta):
-        model = Usuario
+class CadastroModelTarefa(fm.ModelForm):
+    class Meta:
+        model = Tarefa
+        fields = ['tarefa']
