@@ -27,3 +27,4 @@ function delete_task() {
     current_element.parent().fadeOut("fast", function() { $(this).remove(); });
   });
 }
+
