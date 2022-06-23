@@ -30,7 +30,7 @@ def cadastro(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        user = User.objects.filter(username=username, email=email).first()
+        user = User.objects.filter(email=email).first()
 
         if user:
             messages.error(request, 'Já existe uma conta com esse email',
