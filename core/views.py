@@ -21,7 +21,10 @@ def index(request):
             vincula.usuario = request.user
             vincula.save()
 
-    return render(request, 'index.html',{'tasks': tasks} )
+    return render(request, 'index.html',{'tasks': tasks})
+
+def contato(request):
+    return  render(request, 'contato.html')
 
 
 def cadastro(request):
