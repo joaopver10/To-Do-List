@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as lg
 from .forms import CadastroModelTarefa
-
+import time
 
 
 @login_required(login_url="login")
@@ -24,7 +24,7 @@ def index(request):
     return render(request, 'index.html',{'tasks': tasks})
 
 def contato(request):
-    return  render(request, 'contato.html')
+    return render(request, 'contato.html')
 
 
 def cadastro(request):
@@ -42,7 +42,9 @@ def cadastro(request):
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
-        messages.success(request, 'Usuário cadastrado com sucesso.', extra_tags='cad')
+        time.sleep(2)
+        return HttpResponseRedirect('login')
+
 
     return render(request, 'cadastro.html')
 
