@@ -1,3 +1,5 @@
+import math
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
@@ -7,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as lg
 from .forms import CadastroModelTarefa
-
+import time
 
 
 @login_required(login_url="login")
@@ -21,7 +23,11 @@ def index(request):
             vincula.usuario = request.user
             vincula.save()
 
-    return render(request, 'index.html',{'tasks': tasks} )
+    return render(request, 'index.html',{'tasks': tasks})
+
+
+def contato(request):
+    return render(request, 'contato.html')
 
 
 def cadastro(request):
@@ -39,7 +45,9 @@ def cadastro(request):
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
-        messages.success(request, 'Usuário cadastrado com sucesso.', extra_tags='cad')
+        time.sleep(2)
+        return HttpResponseRedirect('login')
+
 
     return render(request, 'cadastro.html')
 

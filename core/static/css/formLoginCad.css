@@ -2,6 +2,7 @@
   stage: 0;
 }
 
+
 /* config.css */
 
 :root {
@@ -32,6 +33,15 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+p.alert{
+  background: #f90000eb;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  padding: 2%;
+  border-radius: 3px;
 }
 
 /* helpers/icon.css */

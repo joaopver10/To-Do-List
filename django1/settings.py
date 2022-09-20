@@ -13,11 +13,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import dj_database_url
 
-
+"""
 DATABASES = {
     'default': dj_database_url.config()
 }
-
+"""
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+#23qwyv-4sh@%fj*b)r)r#*xs9df@bazn(@oq4i!67-+5x4f!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'django1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'todolist',
         'USER': 'root',
         'PASSWORD': '1234',
@@ -95,7 +95,6 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

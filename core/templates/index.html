@@ -1,40 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tarefas</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+{% block content %}
 
-  </head>
-  <body>
-<div class="nav">
-  <input type="checkbox" id="nav-check">
-  <div class="nav-header">
-    <div class="nav-title">
-      To-Do-List
-    </div>
-  </div>
-  <div class="nav-btn">
-    <label for="nav-check">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
-  </div>
-
-  <div class="nav-links">
-    <a href="/" >Inicio</a>
-    <a href="#" >Perfil</a>
-    <a href="#" >Contato</a>
-    <a href="deslogar" >Sair</a>
-
-  </div>
-</div>
-
-  <div class="wrap">
+<div class="wrap">
   <div class="task-list">
     <ul>
       {% for task in tasks %}
@@ -52,9 +20,5 @@
         {% csrf_token %}
     <input type="text" name="tarefa"  placeholder="Adicione uma nova tarefa..." />
   </form>
-
 </div>
-
-    <script src="{% static 'js/index.js' %}"></script>
-  </body>
-</html>
+    {% endblock %}
