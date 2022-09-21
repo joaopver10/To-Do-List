@@ -54,15 +54,17 @@ def cadastro(request):
 
 def login(request):
     if request.method == 'POST':
-        try:
-            email = request.POST['email']
-            username = User.objects.get(email=email).username
-            senha = request.POST['senha']
-            user = authenticate(request, username=username, password=senha)
-            if user:
-                lg(request, user)
-                return redirect('index')
-        except:
+
+        email = request.POST['email']
+        username = User.objects.get(email=email).username
+        senha = request.POST['senha']
+        user = authenticate(request, username=username, password=senha)
+        print(user)
+        if user:
+            lg(request, user)
+            return redirect('index')
+
+        if user is None:
             messages.error(request, 'Email ou senha inválida', extra_tags='login')
             return redirect('login')
 
