@@ -32,20 +32,29 @@ def contato(request):
 
 def cadastro(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
+        try:
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            senha = request.POST.get('senha')
 
-        user = User.objects.filter(username=username, email=email).first()
+            user = User.objects.filter(username=username, email=email)
 
-        if user:
+            nomeError = User.objects.filter(username=username)
+            emailError = User.objects.filter(email=email)
+
+            if user and nomeError or emailError:
+                messages.error(request, 'Já existe uma conta com esse email',
+                               extra_tags='cad')
+                return redirect('cadastro')
+
+            user = User.objects.create_user(username=username, email=email, password=senha)
+            user.save()
+            time.sleep(2)
+        except:
             messages.error(request, 'Já existe uma conta com esse email',
                            extra_tags='cad')
             return redirect('cadastro')
 
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        user.save()
-        time.sleep(2)
         return HttpResponseRedirect('login')
 
 
@@ -54,17 +63,20 @@ def cadastro(request):
 
 def login(request):
     if request.method == 'POST':
+        try:
+            email = request.POST['email']
+            username = User.objects.get(email=email).username
+            senha = request.POST['senha']
+            user = authenticate(request, username=username, password=senha)
 
-        email = request.POST['email']
-        username = User.objects.get(email=email).username
-        senha = request.POST['senha']
-        user = authenticate(request, username=username, password=senha)
-        print(user)
-        if user:
-            lg(request, user)
-            return redirect('index')
+            if user:
+                lg(request, user)
+                return redirect('index')
 
-        if user is None:
+            if email and username is None:
+                messages.error(request, 'Email ou senha inválida', extra_tags='login')
+                return redirect('login')
+        except:
             messages.error(request, 'Email ou senha inválida', extra_tags='login')
             return redirect('login')
 
