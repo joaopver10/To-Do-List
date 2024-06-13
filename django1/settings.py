@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'django1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -94,6 +94,15 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': 3306,
     }
+}
+"""
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://postgres:nbCJERObVAYnRdZtxpfRRyyQTyJZRulN@viaduct.proxy.rlwy.net:36149/railway',
+        conn_max_age=600,
+        ssl_require= not DEBUG
+
+    )
 }
 
 # Password validation
