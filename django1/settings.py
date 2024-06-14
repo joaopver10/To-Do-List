@@ -84,26 +84,17 @@ WSGI_APPLICATION = 'django1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todolist',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': 3306,
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'todolist_db_msmr',
+        'USER': 'admin',
+        'PASSWORD': 'kAH9F1OateG0uaKWmAJ3zOxxhCcizh6V',
+        'HOST': 'dpg-cpm4hheehbks73d8lkqg-a.oregon-postgres.render.com',
+        'PORT': 5432,
     }
 }
-"""
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://postgres:nbCJERObVAYnRdZtxpfRRyyQTyJZRulN@viaduct.proxy.rlwy.net:36149/railway',
-        conn_max_age=600,
-        ssl_require= not DEBUG
 
-    )
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
