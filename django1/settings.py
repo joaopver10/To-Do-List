@@ -14,11 +14,6 @@ from pathlib import Path
 import dj_database_url
 from django.conf.global_settings import DATABASES
 
-"""
-DATABASES = {
-    'default': dj_database_url.config()
-}
-"""
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+#23qwyv-4sh@%fj*b)r)r#*xs9df@bazn(@oq4i!67-+5x4f!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
