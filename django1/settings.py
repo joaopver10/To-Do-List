@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+from django.conf.global_settings import DATABASES
 
 """
 DATABASES = {
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'django1.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -94,7 +95,9 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+"""
 
+DATABASES["default"] = dj_database_url.parse("postgres://todolist_db_msmr_user:kAH9F1OateG0uaKWmAJ3zOxxhCcizh6V@dpg-cpm4hheehbks73d8lkqg-a.oregon-postgres.render.com/todolist_db_msmr")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
