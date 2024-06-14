@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import dj_database_url
-from django.conf.global_settings import DATABASES
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -94,8 +93,13 @@ DATABASES = {
 }
 """
 
-DATABASES["default"] = dj_database_url.parse("postgres://todolist_db_msmr_user:kAH9F1OateG0uaKWmAJ3zOxxhCcizh6V@dpg-cpm4hheehbks73d8lkqg-a.oregon-postgres.render.com/todolist_db_msmr")
-
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://postgres:nnBZSPXNZbjuxJrwYCYLRjtrmPYyVpDE@roundhouse.proxy.rlwy.net:18558/railway',
+        conn_max_age=600,
+        ssl_require= DEBUG
+    )
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
